@@ -41,6 +41,36 @@ export default function Home() {
       price: '10.99',
     },
   ]);
+  const [Subcategories, SetSubCategories] = useState([
+    {
+      id: 1,
+      name: 'Campari tomato',
+      image: require('../../assets/images/featureimage4.jpg'),
+      quantity: '6 kg',
+      price: '10',
+    },
+    {
+      id: 2,
+      name: 'Halal Chicken',
+      image: require('../../assets/images/product2.jpg'),
+      quantity: '1 kg',
+      price: '11',
+    },
+    {
+      id: 3,
+      name: 'Spicy Chicken',
+      image: require('../../assets/images/product3.jpg'),
+      quantity: '2 kg',
+      price: '18',
+    },
+    {
+      id: 4,
+      name: 'Grilled Chicken',
+      image: require('../../assets/images/grilled.jpg'),
+      quantity: '2 kg',
+      price: '21',
+    },
+  ]);
   const renderCategories = () =>
     categories.map(category => (
       <TouchableOpacity key={category.id} style={styles.featuredContainer}>
@@ -60,6 +90,26 @@ export default function Home() {
         </View>
       </TouchableOpacity>
     ));
+
+  const renderSubCategories = () =>
+    Subcategories.map(subcategory => (
+      <TouchableOpacity key={subcategory.id}>
+        <View style={styles.productList}>
+          <Image style={styles.productImage} source={subcategory.image} />
+          <View style={styles.productDescription}>
+            <Text style={styles.productHeading}>{subcategory.name}</Text>
+            <Text style={styles.productPara}>
+              {subcategory.quantity}- Arizona Meat
+            </Text>
+            <Text style={styles.productRate}>${subcategory.price}/box</Text>
+          </View>
+          <View style={styles.arrow}>
+            <Arrow width={30} height={30} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    ));
+
   return (
     <View style={styles.mainView}>
       <View style={styles.topView}>
@@ -95,71 +145,8 @@ export default function Home() {
       </View>
       <View>
         <Text style={styles.featuredText}>Featured Offers</Text>
-        <ScrollView>
-          <TouchableOpacity>
-            <View style={styles.productList}>
-              <Image
-                style={styles.productImage}
-                source={require('../../assets/images/product2.jpg')}
-              />
-              <View style={styles.productDescription}>
-                <Text style={styles.productHeading}>Campari tomato</Text>
-                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
-                <Text style={styles.productRate}>$15/box</Text>
-              </View>
-              <View style={styles.arrow}>
-                <Arrow width={30} height={30} />
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.productList}>
-              <Image
-                style={styles.productImage}
-                source={require('../../assets/images/product2.jpg')}
-              />
-              <View style={styles.productDescription}>
-                <Text style={styles.productHeading}>Campari tomato</Text>
-                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
-                <Text style={styles.productRate}>$15/box</Text>
-              </View>
-              <View style={styles.arrow}>
-                <Arrow width={30} height={30} />
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.productList}>
-              <Image
-                style={styles.productImage}
-                source={require('../../assets/images/product2.jpg')}
-              />
-              <View style={styles.productDescription}>
-                <Text style={styles.productHeading}>Campari tomato</Text>
-                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
-                <Text style={styles.productRate}>$15/box</Text>
-              </View>
-              <View style={styles.arrow}>
-                <Arrow width={30} height={30} />
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.productList}>
-              <Image
-                style={styles.productImage}
-                source={require('../../assets/images/product2.jpg')}
-              />
-              <View style={styles.productDescription}>
-                <Text style={styles.productHeading}>Campari tomato</Text>
-                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
-                <Text style={styles.productRate}>$15/box</Text>
-              </View>
-              <View style={styles.arrow}>
-                <Arrow width={30} height={30} />
-              </View>
-            </View>
-          </TouchableOpacity>
+        <ScrollView contentContainerStyle={styles.productMainScroll}>
+          {renderSubCategories()}
         </ScrollView>
       </View>
     </View>
@@ -300,6 +287,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     fontWeight: 'bold',
+  },
+  productMainScroll: {
+    height: 1000,
   },
 
   productList: {
