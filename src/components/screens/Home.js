@@ -10,6 +10,7 @@ import {
 import React, {useState} from 'react';
 import LocationLogo from '../../assets/images/Location.svg';
 import TrashLogo from '../../assets/images/trash.svg';
+import Arrow from '../../assets/images/Arrow.svg';
 
 export default function Home() {
   const [categories, setCategories] = useState([
@@ -40,13 +41,10 @@ export default function Home() {
       price: '10.99',
     },
   ]);
-  const renderCategories = () => (
+  const renderCategories = () =>
     categories.map(category => (
       <TouchableOpacity key={category.id} style={styles.featuredContainer}>
-        <Image
-          style={styles.featuredImage}
-          source={category.image}
-        />
+        <Image style={styles.featuredImage} source={category.image} />
         <Text style={styles.featureHeading}>{category.name}</Text>
         <Text style={styles.featurePara}>By {category.brand}</Text>
 
@@ -56,13 +54,12 @@ export default function Home() {
               <Text style={styles.kilogram}>{category.quantity}</Text>
             </View>
             <View style={styles.priceWrapper}>
-              <Text style={styles.price}> ${ category.price}</Text>
+              <Text style={styles.price}> ${category.price}</Text>
             </View>
           </View>
         </View>
       </TouchableOpacity>
-    ))
-  );
+    ));
   return (
     <View style={styles.mainView}>
       <View style={styles.topView}>
@@ -91,12 +88,79 @@ export default function Home() {
         </ImageBackground>
       </View>
       <View>
-        <Text style={styles.featuredText}>Featured Offer</Text>
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-            {renderCategories()}
-          </ScrollView>
+        <Text style={styles.featuredText}>Featured Offers</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {renderCategories()}
+        </ScrollView>
+      </View>
+      <View>
+        <Text style={styles.featuredText}>Featured Offers</Text>
+        <ScrollView>
+          <TouchableOpacity>
+            <View style={styles.productList}>
+              <Image
+                style={styles.productImage}
+                source={require('../../assets/images/product2.jpg')}
+              />
+              <View style={styles.productDescription}>
+                <Text style={styles.productHeading}>Campari tomato</Text>
+                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
+                <Text style={styles.productRate}>$15/box</Text>
+              </View>
+              <View style={styles.arrow}>
+                <Arrow width={30} height={30} />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={styles.productList}>
+              <Image
+                style={styles.productImage}
+                source={require('../../assets/images/product2.jpg')}
+              />
+              <View style={styles.productDescription}>
+                <Text style={styles.productHeading}>Campari tomato</Text>
+                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
+                <Text style={styles.productRate}>$15/box</Text>
+              </View>
+              <View style={styles.arrow}>
+                <Arrow width={30} height={30} />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={styles.productList}>
+              <Image
+                style={styles.productImage}
+                source={require('../../assets/images/product2.jpg')}
+              />
+              <View style={styles.productDescription}>
+                <Text style={styles.productHeading}>Campari tomato</Text>
+                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
+                <Text style={styles.productRate}>$15/box</Text>
+              </View>
+              <View style={styles.arrow}>
+                <Arrow width={30} height={30} />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={styles.productList}>
+              <Image
+                style={styles.productImage}
+                source={require('../../assets/images/product2.jpg')}
+              />
+              <View style={styles.productDescription}>
+                <Text style={styles.productHeading}>Campari tomato</Text>
+                <Text style={styles.productPara}>6 kg- Arizona Meat</Text>
+                <Text style={styles.productRate}>$15/box</Text>
+              </View>
+              <View style={styles.arrow}>
+                <Arrow width={30} height={30} />
+              </View>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     </View>
   );
@@ -236,5 +300,50 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     fontWeight: 'bold',
+  },
+
+  productList: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 5,
+  },
+
+  productImage: {
+    borderRadius: 8,
+    width: 75,
+    height: 75,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  productDescription: {
+    marginRight: 70,
+  },
+  productHeading: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+    fontFamily: 'Inter-Bold.ttf',
+  },
+
+  productPara: {
+    fontSize: 12,
+    fontFamily: 'Inter-Bold.ttf',
+    color: '#7b7b7b',
+    paddingVertical: 5,
+  },
+  productRate: {
+    fontSize: 12,
+    fontFamily: 'Inter-Bold.ttf',
+    color: '#b8b8b8',
+  },
+
+  arrow: {
+    backgroundColor: 'black',
+    borderRadius: 14,
+    width: 50,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
