@@ -25,7 +25,7 @@ export default function Home() {
 
     {
       id: 2,
-      name: 'Pasturized Milk',
+      name: 'Pastorised Milk',
       brand: 'Arizona Meat',
       image: require('../../assets/images/featureimage2.jpg'),
       quantity: '1 L',
