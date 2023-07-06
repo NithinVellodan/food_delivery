@@ -1,13 +1,15 @@
-import { View, SafeAreaView, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import Home from './src/components/screens/Home';
 import Order from './src/components/screens/Order';
 import Search from './src/components/screens/Search';
 import SearchButton from '../food_delivery/src/assets/images/search-normal.svg';
 import HomeButton from '../food_delivery/src/assets/images/Home.svg';
-import OrderButton from '../food_delivery/src/assets/images/Order.svg';
+import HomeButtonFill from '../food_delivery/src/assets/images/Home2.svg';
+import OrderButtonFill from '../food_delivery/src/assets/images/Order.svg';
+import OrderButton from '../food_delivery/src/assets/images/Order2.svg';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -19,13 +21,24 @@ export default function App() {
 
   const HomeTabIcon = () => (
     <View style={styles.tabIconWrapper}>
-      <HomeButton width={30} height={30} fill="blue" />
+      <HomeButton width={30} height={30} />
+    </View>
+  );
+
+  const HomeTabIconFill = () => (
+    <View style={styles.tabIconWrapper}>
+      <HomeButtonFill width={30} height={30} />
     </View>
   );
 
   const OrderTabIcon = () => (
     <View style={styles.tabIconWrapper}>
-      <OrderButton width={30} height={30} fill="red" />
+      <OrderButton width={30} height={30} />
+    </View>
+  );
+  const OrderTabIconFill = () => (
+    <View style={styles.tabIconWrapper}>
+      <OrderButtonFill width={30} height={30} />
     </View>
   );
 
@@ -34,9 +47,8 @@ export default function App() {
       <SafeAreaView style={styles.MainView}>
         <Tab.Navigator
           screenOptions={{
-            tabBarActiveTintColor:"#000",
             headerShown: false,
-            tabBarActiveTintColor: 'black',
+            tabBarActiveTintColor: '',
             tabStyle: styles.tabItem,
             tabBarStyle: styles.tabBar,
           }}>
@@ -44,7 +56,9 @@ export default function App() {
             name="Home"
             component={Home}
             options={{
-              tabBarIcon: () => <HomeTabIcon />,
+              tabBarIcon: ({focused}) => {
+                return focused ? <HomeTabIconFill /> : <HomeTabIcon />;
+              },
               tabBarLabel: 'Home',
               tabBarLabelStyle: styles.tabBarLabel,
             }}
@@ -54,14 +68,17 @@ export default function App() {
             component={Search}
             options={{
               tabBarIcon: () => <SearchTabIcon />,
-              tabBarLabel: '', 
+              tabBarLabel: '',
             }}
           />
+
           <Tab.Screen
             name="Order"
             component={Order}
             options={{
-              tabBarIcon: () => <OrderTabIcon />,
+              tabBarIcon: ({focused}) => {
+                return focused ? <OrderTabIconFill /> : <OrderTabIcon />;
+              },
               tabBarLabel: 'Order',
               tabBarLabelStyle: styles.tabBarLabel,
             }}
@@ -102,7 +119,7 @@ const styles = StyleSheet.create({
 
   tabBarLabel: {
     fontSize: 12,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     color: 'black',
     marginBottom: 15,
   },
