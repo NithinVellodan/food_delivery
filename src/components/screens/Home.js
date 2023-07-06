@@ -45,14 +45,14 @@ export default function Home() {
     {
       id: 1,
       name: 'Campari tomato',
-      image: require('../../assets/images/featureimage4.jpg'),
+      image: require('../../assets/images/product2.jpg'),
       quantity: '6 kg',
       price: '10',
     },
     {
       id: 2,
       name: 'Halal Chicken',
-      image: require('../../assets/images/product2.jpg'),
+      image: require('../../assets/images/featureimage4.jpg'),
       quantity: '1 kg',
       price: '11',
     },
