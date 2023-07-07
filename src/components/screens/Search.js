@@ -83,8 +83,10 @@ export default function Search() {
         <View style={styles.resultList}>
           <Image style={styles.foodImage} source={item.image} />
           <View style={styles.description}>
-            <Text style={styles.descriptionHeading }>{item.name}</Text>
-            <Text style={styles.weightPara}>{item.quantity} {item.brand}</Text>
+            <Text style={styles.descriptionHeading}>{item.name}</Text>
+            <Text style={styles.weightPara}>
+              {item.quantity} {item.brand}
+            </Text>
             <Text style={styles.ratePara}>${item.price}</Text>
           </View>
         </View>
@@ -217,8 +219,8 @@ const styles = StyleSheet.create({
     // width: 360,
     // height: 100,
   },
-  resultList:{
-    flexDirection:"row",
+  resultList: {
+    flexDirection: 'row',
   },
   foodImage: {
     borderRadius: 8,
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     fontSize: 11,
     marginBottom: 10,
-    // color: '#ADADAD',
+    color: '#000',
   },
   ratePara: {
     fontFamily: 'Inter-Regular',
