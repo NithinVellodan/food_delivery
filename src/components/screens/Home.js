@@ -139,7 +139,7 @@ export default function Home() {
       </View>
       <View>
         <Text style={styles.featuredText}>Featured Offers</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
           {renderCategories()}
         </ScrollView>
       </View>

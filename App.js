@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   tabBarLabel: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#000',
     marginBottom: 15,
   },
 });
