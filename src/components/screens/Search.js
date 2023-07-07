@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,20 @@ import TrashIcon from '../../assets/images/trash.svg';
 import Star from '../../assets/images/Star.svg';
 
 export default function Search() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = () => {
+    const filteredResults = list.filter(item =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setSearchResults(filteredResults);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchQuery]);
+
   const [list, setList] = useState([
     {
       id: 1,
@@ -77,8 +91,9 @@ export default function Search() {
       review: '91',
     },
   ]);
-  const renderList = () =>
-    list.map(item => (
+  const renderList = () => {
+    const data = searchResults.length > 0 ? searchResults : list;
+    return data.map(item => (
       <TouchableOpacity key={item.id} style={styles.foodContainer}>
         <View style={styles.resultList}>
           <Image style={styles.foodImage} source={item.image} />
@@ -98,6 +113,7 @@ export default function Search() {
         </View>
       </TouchableOpacity>
     ));
+  };
 
   return (
     <View style={styles.mainView}>
@@ -107,7 +123,10 @@ export default function Search() {
             style={styles.inputText}
             placeholder="Fresh Fillet Steak"
             placeholderTextColor="#000"
+            value={searchQuery}
+            onChangeText={text => setSearchQuery(text)}
           />
+
           <TouchableOpacity style={styles.closeBtn}>
             <CloseIcon width={30} height={30} />
           </TouchableOpacity>

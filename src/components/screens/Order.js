@@ -157,10 +157,35 @@ export default function Order() {
                 </View>
                 <View style={styles.dashedLine}></View>
                 <View style={styles.bottomSection}>
-                  <Text style={styles.productTotalTxtExpanded}>
+                {order?.content && (
+                  <View>
+                    <Text style={styles.productTotalTxtExpanded}>
+                      {order?.count} Items
+                    </Text>
+                  </View>
+                )}
+                {!order?.content && (
+                  <View style={styles.bottomFinishedLeft}>
+                       <View style={styles.productFinishedListImage}>
+                        <Image
+                          source={require('../../assets/images/featureimage3.jpg')}
+                          style={styles.productImageOne}
+                        />
+                        <Image
+                          source={require('../../assets/images/product1.jpg')}
+                          style={styles.productImageTwo}
+                        />
+                        <Image
+                          source={require('../../assets/images/tomato.jpg')}
+                          style={styles.productImageThree}
+                        />
+                        <Text style={styles.productRemainTxt}>+4</Text>
+                      </View>
+                  <Text style={styles.productTotalFinishedTxt}>
                     {order?.count} Items
                   </Text>
-                  <Text style={styles.priceSection}>${order?.totalprice}</Text>
+                </View>)}
+                  <Text style={styles.priceSection}>{order?.totalprice}</Text>
                 </View>
                 {order?.content?.map(item => {
                   return (
@@ -184,63 +209,19 @@ export default function Order() {
                           {item.price}
                         </Text>
                       </View>
-                      <View></View>
-                      <View></View>
                     </View>
                   );
                 })}
+                {order?.content && (
+                  <TouchableOpacity style={styles.orderBtn}>
+                    <Text style={styles.orderBtnTxt}>Order Again</Text>
+                  </TouchableOpacity>
+                )}
 
-                <TouchableOpacity style={styles.orderBtn}>
-                  <Text style={styles.orderBtnTxt}>Order Again</Text>
-                </TouchableOpacity>
               </View>
             );
           })}
 
-          {/* <View style={styles.finishedCard}>
-            <View style={styles.topSection}>
-              <View style={styles.leftSection}>
-                <View style={styles.iconContainer}>
-                  <ShopIcon width={25} height={25} />
-                </View>
-                <View style={styles.detailsSection}>
-                  <Text style={styles.orderText}>Order #185874</Text>
-                  <Text style={styles.dateText}>Fri 21 Aug - 10:21 AM</Text>
-                </View>
-              </View>
-              <View style={styles.rightSection}>
-                <View style={styles.userSection}>
-                  <Text style={styles.statusTextFinished}>FINISHED</Text>
-                  <View style={styles.userContainer}>
-                    <Text style={styles.byText}>by</Text>
-                    <Text style={styles.userNameTxt}>Amina Ngyuen</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View style={styles.dashedLine}></View>
-            <View style={styles.bottomSection}>
-              <View style={styles.bottomLeft}>
-                <View style={styles.productListImage}>
-                  <Image
-                    source={require('../../assets/images/featureimage3.jpg')}
-                    style={styles.productImageOne}
-                  />
-                  <Image
-                    source={require('../../assets/images/product1.jpg')}
-                    style={styles.productImageTwo}
-                  />
-                  <Image
-                    source={require('../../assets/images/tomato.jpg')}
-                    style={styles.productImageThree}
-                  />
-                  <Text style={styles.productRemainTxt}>+4</Text>
-                </View>
-              </View>
-              <Text style={styles.productTotalTxt}>7 Items</Text>
-              <Text style={styles.priceSection}>$512.00</Text>
-            </View>
-          </View> */}
         </ScrollView>
       </View>
     </View>
@@ -250,6 +231,7 @@ export default function Order() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    marginBottom:20
   },
   contentSection: {
     paddingHorizontal: 20,
@@ -339,6 +321,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
+  bottomFinishedLeft:{
+    position: 'relative',
+  },
+  productFinishedListImage:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+  },
   productImageOne: {
     position: 'absolute',
     height: 40,
@@ -385,6 +378,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#ADADAD',
     marginLeft: 25,
+  },
+  productTotalFinishedTxt:{
+    fontSize: 17,
+    color: '#ADADAD',
+    marginLeft: 110,
   },
   priceSection: {
     fontSize: 17,
