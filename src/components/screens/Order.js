@@ -6,10 +6,67 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import ShopIcon from '../../assets/images/Shop.svg';
 
 export default function Order() {
+  const [activeOrder, setActiveOrder] = useState([
+    {
+      id: 1,
+      orderNumber: '185874',
+      date: 'from',
+      Orderedby: 'Amina Nguyen',
+      totalprice: '$512',
+      status: 'ACTIVE',
+      count: '7',
+    },
+  ]);
+  const finishedOrder = [
+    {
+      id: 1,
+      orderNumber: '185874',
+      date: 'from',
+      Orderedby: 'Amina Nguyen',
+      totalprice: '$512',
+      status: 'FINISHED',
+      count: '7',
+      content: [
+        {
+          id: 1,
+          image: require('../../assets/images/product5.jpg'),
+          title: 'Fresh Sirioin filet steak',
+          price: '$512',
+          quantity: '6 kg',
+          origin: 'Arizona Meat',
+        },
+        {
+          id: 2,
+          image: require('../../assets/images/product1.jpg'),
+          title: 'Button Mushrooms',
+          price: '$58',
+          quantity: '2 kg',
+          origin: 'Aguero Family Garden',
+        },
+        {
+          id: 3,
+          image: require('../../assets/images/featureimage3.jpg'),
+          title: 'Fresh Sirioin filet steak',
+          price: '$216',
+          quantity: '5 kg',
+          origin: 'Aguaro Family Garden',
+        },
+      ],
+    },
+    {
+      id: 2,
+      orderNumber: '185874',
+      date: 'from',
+      Orderedby: 'Amina Nguyen',
+      totalprice: '$512',
+      status: 'FINISHED',
+      count: '7',
+    },
+  ];
   return (
     <View style={styles.mainContainer}>
       <View style={styles.contentSection}>
@@ -17,142 +74,130 @@ export default function Order() {
         <ScrollView
           contentContainerStyle={styles.scrollViewStyle}
           showsVerticalScrollIndicator={false}>
-          <View style={styles.activeCard}>
-            <View style={styles.topSection}>
-              <View style={styles.leftSection}>
-                <View style={styles.iconContainer}>
-                  <ShopIcon width={25} height={25} />
-                </View>
-                <View style={styles.detailsSection}>
-                  <Text style={styles.orderText}>Order #185874</Text>
-                  <Text style={styles.dateText}>Fri 21 Aug - 10:21 AM</Text>
-                </View>
-              </View>
-              <View style={styles.rightSection}>
-                <View style={styles.userSection}>
-                  <Text style={styles.statusText}>ACTIVE</Text>
-                  <View style={styles.userContainer}>
-                    <Text style={styles.byText}>by</Text>
-                    <Text style={styles.userNameTxt}>Amina Ngyuen</Text>
+          {activeOrder.map(order => {
+            return (
+              <View style={styles.activeCard} key={order.id}>
+                <View style={styles.topSection}>
+                  <View style={styles.leftSection}>
+                    <View style={styles.iconContainer}>
+                      <ShopIcon width={25} height={25} />
+                    </View>
+                    <View style={styles.detailsSection}>
+                      <Text style={styles.orderText}>Order #{order?.id}</Text>
+                      <Text style={styles.dateText}>{order?.date}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.rightSection}>
+                    <View style={styles.userSection}>
+                      <Text style={styles.statusText}>{order?.status}</Text>
+                      <View style={styles.userContainer}>
+                        <Text style={styles.byText}>by</Text>
+                        <Text style={styles.userNameTxt}>
+                          {order?.Orderedby}
+                        </Text>
+                      </View>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </View>
-            <View style={styles.dashedLine}></View>
-            <View style={styles.bottomSection}>
-              <View style={styles.bottomLeft}>
-                <View style={styles.productListImage}>
-                  <Image
-                    source={require('../../assets/images/featureimage3.jpg')}
-                    style={styles.productImageOne}
-                  />
-                  <Image
-                    source={require('../../assets/images/product1.jpg')}
-                    style={styles.productImageTwo}
-                  />
-                  <Image
-                    source={require('../../assets/images/tomato.jpg')}
-                    style={styles.productImageThree}
-                  />
-                  <Text style={styles.productRemainTxt}>+4</Text>
+                <View style={styles.dashedLine}></View>
+                <View style={styles.bottomSection}>
+                  <View style={styles.bottomLeft}>
+                    <View style={styles.productListImage}>
+                      <Image
+                        source={require('../../assets/images/featureimage3.jpg')}
+                        style={styles.productImageOne}
+                      />
+                      <Image
+                        source={require('../../assets/images/product1.jpg')}
+                        style={styles.productImageTwo}
+                      />
+                      <Image
+                        source={require('../../assets/images/tomato.jpg')}
+                        style={styles.productImageThree}
+                      />
+                      <Text style={styles.productRemainTxt}>+4</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.productTotalTxt}>
+                    {order?.count} Items
+                  </Text>
+                  <Text style={styles.priceSection}>{order?.totalprice}</Text>
                 </View>
               </View>
-              <Text style={styles.productTotalTxt}>7 Items</Text>
-              <Text style={styles.priceSection}>$512.00</Text>
-            </View>
-          </View>
-
-          <View style={styles.finishedCard}>
-            <View style={styles.topSection}>
-              <View style={styles.leftSection}>
-                <View style={styles.iconContainer}>
-                  <ShopIcon width={25} height={25} />
-                </View>
-                <View style={styles.detailsSection}>
-                  <Text style={styles.orderText}>Order #185874</Text>
-                  <Text style={styles.dateText}>Fri 21 Aug - 10:21 AM</Text>
-                </View>
-              </View>
-              <View style={styles.rightSection}>
-                <View style={styles.userSection}>
-                  <Text style={styles.statusTextFinished}>FINISHED</Text>
-                  <View style={styles.userContainer}>
-                    <Text style={styles.byText}>by</Text>
-                    <Text style={styles.userNameTxt}>Amina Ngyuen</Text>
+            );
+          })}
+          {finishedOrder.map(order => {
+            return (
+              <View style={styles.finishedCard} key={order.id}>
+                <View style={styles.topSection}>
+                  <View style={styles.leftSection}>
+                    <View style={styles.iconContainer}>
+                      <ShopIcon width={25} height={25} />
+                    </View>
+                    <View style={styles.detailsSection}>
+                      <Text style={styles.orderText}>
+                        Order #{order?.orderNumber}
+                      </Text>
+                      <Text style={styles.dateText}>Fri 21 Aug - 10:21 AM</Text>
+                    </View>
+                  </View>
+                  <View style={styles.rightSection}>
+                    <View style={styles.userSection}>
+                      <Text style={styles.statusTextFinished}>
+                        {order?.status}
+                      </Text>
+                      <View style={styles.userContainer}>
+                        <Text style={styles.byText}>by</Text>
+                        <Text style={styles.userNameTxt}>
+                          {order?.Orderedby}
+                        </Text>
+                      </View>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </View>
-            <View style={styles.dashedLine}></View>
-            <View style={styles.bottomSection}>
-              <Text style={styles.productTotalTxtExpanded}>7 Items</Text>
-              <Text style={styles.priceSection}>$512.00</Text>
-            </View>
-
-            <View style={styles.bottomSubSection}>
-              <View style={styles.expandedSection}>
-                <View style={styles.leftDetailSection}>
-                  <Image
-                    source={require('../../assets/images/product5.jpg')}
-                    style={styles.productImage}
-                  />
-                  <View style={styles.detailSubSection}>
-                    <Text style={styles.productTitle}>
-                      Fresh Sirioin filet steak
-                    </Text>
-                    <Text style={styles.productBrand}>6 kg - Arizona Meat</Text>
-                  </View>
+                <View style={styles.dashedLine}></View>
+                <View style={styles.bottomSection}>
+                  <Text style={styles.productTotalTxtExpanded}>
+                    {order?.count} Items
+                  </Text>
+                  <Text style={styles.priceSection}>${order?.totalprice}</Text>
                 </View>
-                <Text style={styles.rightPriceSection}>$512.00</Text>
+                {order?.content?.map(item => {
+                  return (
+                    <View style={styles.bottomSubSection} key={item.id}>
+                      <View style={styles.expandedSection}>
+                        <View style={styles.leftDetailSection}>
+                          <Image
+                            source={item?.image}
+                            style={styles.productImage}
+                          />
+                          <View style={styles.detailSubSection}>
+                            <Text style={styles.productTitle}>
+                              {item?.title}
+                            </Text>
+                            <Text style={styles.productBrand}>
+                              {item.quantity} - {item?.origin}
+                            </Text>
+                          </View>
+                        </View>
+                        <Text style={styles.rightPriceSection}>
+                          {item.price}
+                        </Text>
+                      </View>
+                      <View></View>
+                      <View></View>
+                    </View>
+                  );
+                })}
+
+                <TouchableOpacity style={styles.orderBtn}>
+                  <Text style={styles.orderBtnTxt}>Order Again</Text>
+                </TouchableOpacity>
               </View>
-              <View></View>
-              <View></View>
-            </View>
+            );
+          })}
 
-            <View style={styles.bottomSubSection}>
-              <View style={styles.expandedSection}>
-                <View style={styles.leftDetailSection}>
-                  <Image
-                    source={require('../../assets/images/product1.jpg')}
-                    style={styles.productImage}
-                  />
-                  <View style={styles.detailSubSection}>
-                    <Text style={styles.productTitle}>Button Mushrooms</Text>
-                    <Text style={styles.productBrand}>
-                      6 kg - Aguero Family Garden
-                    </Text>
-                  </View>
-                </View>
-                <Text style={styles.rightPriceSection}>$512.00</Text>
-              </View>
-              <View></View>
-              <View></View>
-            </View>
-
-            <View style={styles.bottomSubSection}>
-              <View style={styles.expandedSection}>
-                <View style={styles.leftDetailSection}>
-                  <Image
-                    source={require('../../assets/images/featureimage3.jpg')}
-                    style={styles.productImage}
-                  />
-                  <View style={styles.detailSubSection}>
-                    <Text style={styles.productTitle}>
-                      Fresh Sirioin filet steak
-                    </Text>
-                    <Text style={styles.productBrand}>6 kg Arizona Meat</Text>
-                  </View>
-                </View>
-                <Text style={styles.rightPriceSection}>$512.00</Text>
-              </View>
-            </View>
-
-            <TouchableOpacity style={styles.orderBtn}>
-              <Text style={styles.orderBtnTxt}>Order Again</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.finishedCard}>
+          {/* <View style={styles.finishedCard}>
             <View style={styles.topSection}>
               <View style={styles.leftSection}>
                 <View style={styles.iconContainer}>
@@ -195,7 +240,7 @@ export default function Order() {
               <Text style={styles.productTotalTxt}>7 Items</Text>
               <Text style={styles.priceSection}>$512.00</Text>
             </View>
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     </View>
